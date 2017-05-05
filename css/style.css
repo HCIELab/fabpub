@@ -26,10 +26,46 @@ body {
 	background: #f2f2f2;
 }
 
+.header-desc
+{
+	color: #333;
+	padding: 25px 0;
+	margin: 0;
+	font-size: 28px;
+	font-weight:bold;
+	font-family: 'Open Sans', sans-serif;
+	position: relative;
+	z-index: 200;
+}
+
 .disclaimer 
 {
 	font-family: 'Open Sans', sans-serif;
 	font-size:11px;
+}
+
+.maintanance-desc
+{
+	color: #333;
+	padding: 25px 0;
+	margin: 0;
+	font-size: 14px;
+	font-weight:bold;
+	font-family: 'Open Sans', sans-serif;
+	position: relative;
+	z-index: 200;
+}
+
+.maintanance-desc:hover
+{
+	color: #333;
+	padding: 25px 0;
+	margin: 0;
+	font-size: 14px;
+	font-weight:bold;
+	font-family: 'Open Sans', sans-serif;
+	position: relative;
+	z-index: 200;
 }
 
 /* Controls
