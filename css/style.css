@@ -42,6 +42,7 @@ body {
 {
 	font-family: 'Open Sans', sans-serif;
 	font-size:11px;
+	color: #b0b0b0;
 }
 
 .maintanance-desc
@@ -66,6 +67,49 @@ body {
 	font-family: 'Open Sans', sans-serif;
 	position: relative;
 	z-index: 200;
+}
+
+.explosition-desc
+{
+	font-family: 'Open Sans', sans-serif;
+	font-size:14px;
+}
+
+.explosition-btn
+{
+    border: 0;
+    border-radius: 2px;
+    padding: 2px 3px;
+    text-transform: uppercase;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: transform;
+}
+
+.explosition-doi
+{
+    color: #f2f2f2;
+	font-size:12px;
+    background-color: #e95a44;
+    border: 1px solid transparent;
+	font-family: 'Open Sans', sans-serif;
+	text-decoration: none;
+}
+
+.explosition-pdf
+{
+    color: #f2f2f2;
+	font-size:12px;
+    background-color: #000686;
+    border: 1px solid transparent;
+	font-family: 'Open Sans', sans-serif;
+	text-decoration: none;
 }
 
 /* Controls
