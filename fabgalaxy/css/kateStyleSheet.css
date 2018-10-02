@@ -1,0 +1,16 @@
+.link {
+  fill: none;
+  stroke: "white";
+  stroke-width: 1.5px;
+}
+
+.keywordDots{
+	font: 10px sans-serif,
+}
+
+.authorDots{
+	fill: #6ea3c9;
+	stroke: #262626;
+  	stroke-width: 1.5px;
+  	opacity: 1.0;
+  }

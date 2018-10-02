@@ -1,0 +1,547 @@
+<!DOCTYPE HTML>
+
+<html xml:lang="en" lang="en">
+<head>
+  	<title>CSE512 | FabViz</title>
+  	<meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  	<link rel="stylesheet" href="css/sharedStyleSheet.css">
+  	<link rel="stylesheet" href="css/liangStyleSheet.css">
+  	<link rel="stylesheet" type="text/css" href="css/kateStyleSheet.css">
+
+  	<!-- Add fonts-->
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway+Dots" rel="stylesheet">
+  	<script type="text/javascript">
+		// Define all global variables that are shared with all the following js files
+		var global_years = [2004, 2006, 2007, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018];
+		var global_selected_dataset;
+	</script>
+  
+  	<!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
+	<script src="js/d3.v4.min.js" type="text/javascript"></script>
+	<script src="js/utility.js" type="text/javascript"></script>
+	<script src="js/liang.js" type="text/javascript"></script>
+	<script src="js/kate.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		global_selected_dataset = get_data_by_selected_years(global_years);
+
+	</script>
+</head>
+
+
+
+<body>
+	<div class="content">
+		<div class="header">
+			<!-- TODO: add the timeline controls-->
+			<div class="title"><span>FabGalaxy</span></div>
+
+			<!-- <div class="welcome_show"><p>FabGalaxy is an interactive visualization platform for exploring the development of fabrication research in academia. Data is provided by <a href="http://hcie.csail.mit.edu/fabpub/" target="_blank">Personal Fabrication Research in HCI and Graphics</a>, which is host by HCI Engineering Group, MIT CSAIL. Special thanks to <a href="http://hcie.csail.mit.edu/stefanie-mueller.html" target="_blank">Stefanie Mueller</a> and <a href="http://punpongsanon.info/" target="_blank">Parinya Punpongsanon</a>.</p></div> -->
+		</div>
+		<div class="viz_panel">
+			<div class="viz_view" style="text-align:center;">
+				<svg id = "visKate" width="1200" height="800" viewBox="-500 -550 1000 1100">
+				</svg>
+			</div>
+			<div class="search_panel">
+				<div id="AuthorSearch">					
+				</div>
+				<div id="KeywordSearch">
+				</div>				
+			</div>
+			<div class="tooltipHide" id="tooltip">
+			</div>
+			<div id="resultlist" class="detail_view_hide" >
+				<p>Search publications by clicking the author or the keyword.</p>
+			</div>
+			<div class="conf_legend" id="ConfLegend">
+                
+                <div class = "legend" id="legend_UIST"><div></div><span>ACM UIST</span></div>
+                <div class = "legend" id="legend_CC"><div></div><span>ACM C&C</span></div>
+                <div class = "legend" id="legend_TEI"><div></div><span>ACM TEI</span></div>
+                <div class = "legend" id="legend_SIGGRAPH"><div></div><span>ACM SIGGRAPH</span></div>
+                <div class = "legend" id="legend_SIGGRAPH_ASIA"><div></div><span>ACM SIGGRAPH ASIA</span></div>
+                <div class = "legend" id="legend_DIS"><div></div><span>ACM DIS</span></div>
+                <div class = "legend" id="legend_EUROGRAPHICS"><div></div><span>ACM EUROGRAPHICS</span></div>
+
+                <div class = "legend" id="legend_CHI"><div></div><span>ACM CHI</span></div>
+                <div class = "legend" id="legend_Symposium"><div></div><span>ACM Symposium (ACM SCF, ACM SCA, ACM SGP)</span></div>
+                <div class = "legend" id="legend_Others" ><div></div><span>Others (ACM VRST, COMPUTER AND GRAPHICS, IOPScience, etc.)</span></div>
+            
+            </div>
+					<div id="help" class="help_panel">
+				<i class="far fa-question-circle fa-2x" onclick="showTutorial(true)"></i>
+				<div class="team">
+					<span>&copy; 2018. Kate Jung & Liang He.</span>
+					<!-- <span>FabViz Team at University of Washington<a href="projectpage.html">project page</a></span> -->
+				</div>
+			</div>
+
+			<div id="overlay" class="overlay_hide" onclick="showTutorial(false)">
+				<div class="author_network_t"><h1>Author Network<span><img src="img/hover_grey.png" width="17px" /></span><span><img src="img/click_grey.png" width="17px" /></span></h1><p>Authors and their top collaborators are shown in the network. Hover and click these nodes to explore the author and their contribution to the field of fabrication. The connecting lines represent the collaborations.</p>
+				<img src="img/tutorial.png" width="100%" />
+				</div>
+
+				<div class="keyword_ring_t"><h1>Keyword Ring<span><img src="img/hover_grey.png" width="17px" /></span><span><img src="img/click_grey.png" width="17px" /></span></h1><p>The size of the keyword dots are propotional to the frequency of use in fabrication research.</p></div>
+
+				<div class="publication_ring_t"><h1>Publication Ring</h1><p>The color coded nodes represent different publications in different conferences and distributed by year.</p></div>
+
+				<div class="search_panel_t"><h1>Search Panel<span><img src="img/hover_grey.png" width="17px" /></span><span><img src="img/click_grey.png" width="17px" /></span></h1><p>Select or type in the author and the keyword for a quick search. The author list and the keyword list are updated as the graph panel changes. The graph panel also updates as the author and the keyword are hovered or selected.</p></div>
+
+				<div class="publication_list_t"><h1>Publication List<span><img src="img/click_grey.png" width="17px" /></span></h1><p>Show the resulting list of publications based on the selected authors and keywords.</p></div>
+
+				<div class="tooltip_t"><h1>Tooltip</h1><p>A tooltip panle pops up at this position to show the stats of the author or the keyword when an author or a keyword is hovered.</p></div>
+
+				<div class="cof_legend_t"><h1>Conference Legend<span><img src="img/hover_grey.png" width="17px" /></span></h1><p>An interactive legend lists all major conference venues.</p></div>
+
+				<div class="hover_t"><span><img src="img/hover_white.png" width="20px" /><span> <span>Hover the element</span></div>
+				<div class="click_t"><span><img src="img/click_white.png" width="20px" /><span> <span>Click the element</span></div>
+
+
+			</div>
+
+		</div>
+	</div>
+	<script>
+	const years = ["2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017"];
+	const venues = ["ACM CHI","ACM C&C", "ACM DIS", "ACM Symposium", "ACM SIGGRAPH","ACM SIGGRAPH ASIA", "ACM TEI","ACM UIST","EUROGRAPHICS","Others"]
+	const venues_legend = ["legend_CHI","legend_CC","legend_DIS","legend_Symposium","legend_SIGGRAPH","legend_SIGGRAPH_ASIA","legend_TEI","legend_UIST","legend_EUROGRAPHICS","legend_Others"];
+	var venue_color = d3.scaleOrdinal()
+    	.range(["#f8cbad", "#F8ADB5", "#84aae2", "#ed9878", "#8dd3d2", "#8782ac", "#edea8c", "#93d788","#d395e2", "#959292"])
+		.domain(venues);
+    var IDs = generateIDs();
+    var authorIDs = IDs.authorIDs;
+    var keyIDs = IDs.keyIDs;
+    
+    var start = Date.now();
+
+	d3.csv("fab_dataset.csv", function(error, data){
+		if (error) throw error;
+		//=====shared between graph view and search views================================= 		
+		var selected_authors = [];
+		var selected_keywords = [];
+		var selected_pubs = [];
+		var selected_pubs_counts = {};
+		
+		var nodes = getNodes(data, authorIDs, keyIDs); 
+		var pub_nodes = nodes.pubNodes;	//{id: pID, authors: [aIDs],  keys: [kIDs], conference: Conference, year: year}
+		var author_nodes = alphabetical_order(nodes.authorNodes); //{id: aID, name: author, pubs: [pIDs]}
+		var key_nodes = alphabetical_order(nodes.keyNodes);//{id: kID, name: keyword, pubs: [pIDs]}
+		var author_links = nodes.authorLinks;
+		
+		//===============Kate: variables used for graph views=============================
+		var DotsAndLines = d3_nodesToDots(author_nodes,pub_nodes,key_nodes,author_links)
+		var authorDots = DotsAndLines.authorDots;
+		var pubDots = DotsAndLines.pubDots;
+		var keywordDots = DotsAndLines.keywordDots;
+		var keyLabels = DotsAndLines.keyLabels;
+		var authorLines = DotsAndLines.authorLines;
+		var linkDict = getSourceTargetDict(author_links);
+		//color ================================================================================
+		authorDots
+			.on("mouseover", mouseoverAuthorDots)
+    		.on("mouseout", mouseoutAuthorDots)
+			.on("click", clicked);
+    		
+    	keywordDots
+    		.on("mouseover", mouseoverKeyDots)
+    		.on("mouseleave", mouseoutKeyDots)
+    		.on("click", clicked);
+	
+// 			console.log(pub_nodes);
+			var legend_elements = document.getElementsByClassName("legend");
+			for (var i = 0; i < legend_elements.length; i++) {
+   				 legend_elements[i].addEventListener("mouseover",function(){
+   				 	this.setAttribute("style", "opacity:1.0");
+					var venue = this.textContent;
+					var pubs_legends = pub_nodes.filter((d)=>d.conference == venue);
+					pubDots
+						.style('opacity', function(d){ 
+						if (venue == 'ACM SIGGRAPH ASIA'){
+							if (d.conference == venue){ return 1; 
+							} else {return 0.2;}
+						}else{ if (venue.includes(d.conference)){return 1;}
+							else{return 0.2;}
+						}});
+					})
+				legend_elements[i].addEventListener("mouseout",function(){
+					this.setAttribute("style", "opacity:0.7");
+					clear_view();
+					graphview_update(selected_authors,selected_pubs,selected_keywords);
+				});
+			};
+    
+    function clicked(d){
+		var thisNode = d3.select(this).datum(); // data of clicked dot
+
+  		if(thisNode.id[0] == "a"){
+    		if(selected_authors.indexOf(d.id) == -1){
+    			d3.select("#"+d.id+"s").attr("class","cellAuthorSelected");
+    		} else{
+    			d3.select("#"+d.id+"s").attr("class","cellDeselected");
+    		}
+    	}else{
+    		if(selected_keywords.indexOf(d.id) == -1){
+    			d3.select("#"+d.id+"s").attr("class","cellKeySelected");
+    		} else{
+    			d3.select("#"+d.id+"s").attr("class","cellDeselected");
+    		}
+    	}
+ 		update_selection(thisNode); 	
+		graphview_update(selected_authors,selected_pubs,selected_keywords);
+		update_project_list(selected_pubs,global_selected_dataset);
+    }
+    function update_selection(node){ // when update selected authors, pubs and keys upon click
+    	var add_pubIDs = [];
+    	var del_pubIDs = [];
+
+    	if (node.id[0] == "a"){ //author click
+    		if (selected_authors.indexOf(node.id) == -1){
+    			selected_authors.push(node.id);
+    			add_pubIDs = node.pubs;
+    		}else{
+    			selected_authors.splice(selected_authors.indexOf(node.id),1)
+    			del_pubIDs = node.pubs;
+    		}
+    	}else if (node.id[0] == "k"){ //keywordClick
+    		if (selected_keywords.indexOf(node.id) == -1){
+    			selected_keywords.push(node.id);
+    			add_pubIDs = node.pubs;
+    		}else{
+    			selected_keywords.splice(selected_keywords.indexOf(node.id),1);
+    			del_pubIDs = node.pubs;
+    		}
+    	}
+    	for (var p = 0; p<add_pubIDs.length; p++){	
+    		if (!(add_pubIDs[p] in selected_pubs_counts)){
+    			selected_pubs_counts[add_pubIDs[p]] = 1
+    		}else{
+    			selected_pubs_counts[add_pubIDs[p]]+=1
+    		}
+    	}
+    	for (var p = 0; p<del_pubIDs.length; p++){	
+    		if (!(del_pubIDs[p] in selected_pubs_counts)){
+//     			console.log("this is weird")
+    		}else{
+    			selected_pubs_counts[del_pubIDs[p]] -=1
+    		}	 
+    	}
+
+    	var pubKeys = Object.keys(selected_pubs_counts);
+    	
+
+    	selected_pubs = [];
+    	for (var k = 0; k<pubKeys.length; k++){
+    		if (selected_pubs_counts[pubKeys[k]] > 0){
+    			selected_pubs.push(pubKeys[k]);
+    		}
+    	}
+    }
+    function refresh_selection(){
+    	for(var i = 0; i<selected_authors.length; i++){
+    		var pubs = author_nodes.filter((d)=>d.id == selected_authors[i]).pubs;
+    		for(var p = 0; p<pubs.length; p++){
+    			if (selected_pubs.indexOf(pubs[p]) ==-1){
+    				selected_pubs.push(pubs[p]);
+    			}
+    		}
+    	}
+    	for(var i = 0; i<selected_keywords.length; i++){
+    		var pubs = key_nodes.filter((d)=>d.id == selected_keywords[i]).pubs;
+    		for(var p = 0; p<pubs.length; p++){
+    			if (selected_pubs.indexOf(pubs[p]) ==-1){
+    				selected_pubs.push(pubs[p]);
+    			}
+    		}
+    	}
+    }
+    //===============================Only Graph View Functions============================
+    var authorNode_color = "#9ad5fe";
+    function mouseoverAuthorDots(d){
+     	clear_view();
+    	var authorDot = d3.select("#"+d.id+"g");
+		
+		var pubIDs = authorDot.datum().pubs;
+		for (var p = 0; p<pubIDs.length; p++){	
+			d3.select("#"+pubIDs[p]+"g")
+				.transition(500)
+				.style('opacity', 1);
+			var keyIDs = d3.select("#"+pubIDs[p]+"g").datum().keys;
+			for (var k = 0; k <keyIDs.length; k++){
+				d3.select("#"+keyIDs[k]+"g")
+					.transition(500)
+					.select('circle')
+						.style('opacity', 0.0)
+				d3.select("#"+keyIDs[k]+"g")
+					.select('text')
+					.style("visibility", "visible");
+			}
+		}
+		
+		authorLines
+    		.transition(500)
+      		.style('stroke-opacity', o => {if (o.source === d || o.target === d ) return 1.0;})  	
+			.transition(500)
+      		.attr('marker-end', o => (o.source === d || o.target === d ? 'url(#arrowhead)' : 'url()'));
+
+		var sources = linkDict.sourceDict[authorDot.datum().id];
+		var target = linkDict.targetDict[authorDot.datum().id];
+		targetMarked = false;
+		for (var s = 0; s <sources.length; s++){	
+			if (sources[s] == target){
+				d3.select("#"+sources[s]+"g")
+					.style('opacity',1.0)
+					.style('fill', '#e18dbb');
+				targetMarked = true;
+			} else{
+				d3.select("#"+sources[s]+"g")
+					.style('opacity',1.0);
+			}
+		}
+		if (!targetMarked){
+			d3.select("#"+target+"g")
+				.style('opacity', 1.0)
+				.style('fill', '#9bbe7c')
+			}
+		authorDot
+		    .style('opacity', 1.0)
+		    .style('fill', authorNode_color)
+      		.transition(200)
+      		.attr('r', () => 1.4 * authorNodeRadius(d));	
+		
+		update_tooltip(authorDot.datum().name, global_selected_dataset, "a");
+    	show_tooltip(true);
+	}
+	function mouseoutAuthorDots(d){
+		clear_view()
+		d3.select("#"+d.id+"g")
+      		.attr('r', () => authorNodeRadius(d));
+      	graphview_update(selected_authors,selected_pubs,selected_keywords)
+      	show_tooltip(false);
+	}
+	function mouseoverKeyDots(d){
+		clear_view()	
+		var keyID = d.id+"g";
+		d3.select("#"+keyID)
+			.select('circle')
+				.style('opacity', 1.0);
+		d3.select("#"+keyID)
+			.transition(500)
+			.style('opacity', 1.0);
+			
+		d3.select("#"+keyID).select('text')
+				.attr("dy", -15) 
+				.style("visibility", "visible")
+		var authorIDs = d3.select("#"+keyID).datum().authors;
+		for (var a = 0; a<authorIDs.length; a++){	
+			d3.select("#"+authorIDs[a]+"g")
+				.transition(500)
+				.style('opacity', 1);
+		}
+	
+		var pubIDs = d3.select("#"+keyID).datum().pubs;
+		for (var p = 0; p<pubIDs.length; p++){	
+			d3.select("#"+pubIDs[p]+"g")
+				.transition(500)
+				.style('opacity', 1);
+		}
+		update_tooltip(d3.select("#"+keyID).datum().name, global_selected_dataset, "k");
+    	show_tooltip(true);
+//     	console.log(d);
+	}	
+	function mouseoutKeyDots(d){
+		clear_view();
+      	graphview_update(selected_authors,selected_pubs,selected_keywords);
+      	show_tooltip(false);
+	}
+	function clear_view(){
+		authorDots
+			.style('fill', authorNode_color)
+			.style('opacity', 0.3);
+		pubDots
+			.style('opacity', 0.2);
+		keywordDots.select('circle')
+			.style('opacity', 0.3);
+		authorLines
+    		.attr('marker-end','url()')
+      		.style('stroke-opacity', 0.5);    	
+      	keyLabels
+      		.style('visibility', 'hidden');	
+      	show_tooltip(true);
+	}
+	
+	function graphview_update(selected_authors,selected_pubs,selected_keywords){
+		pubDots
+			.style('opacity', function(d){ 
+				if (selected_pubs.indexOf(d.id) != -1){return 1;}
+				else{return 0.2;}
+				});
+				
+		keywordDots.select('circle')
+			.style('opacity', function(d){ 
+				if (selected_keywords.indexOf(d.id) != -1){
+					return 1.0;
+				}else{
+					return 0.3;
+				}});
+
+		authorDots
+			.style('opacity', function(d){ 
+				if (selected_authors.indexOf(d.id) != -1){
+					return 1.0
+				}else{
+					return 0.3;
+				}});
+				
+	}
+	//====================================================================================
+	//===============================Only Search View Functions===========================
+	var authorTable = getAuthorTable();
+	fillTableEntries([],author_nodes, authorTable,"a");
+	var keyTable = getKeyTable();	
+	fillTableEntries([], key_nodes, keyTable,"k");
+		d3.select("#asearch").on("keyup", function() { 
+		var searched_data = author_nodes;
+		var text = this.value.trim();
+        var searchResults = searched_data.map(function(r) {
+          var regex = new RegExp("^" + text + ".*|.* " + text + ".*", "i");
+          if (regex.test(r.name)) { // if there are any results
+            return regex.exec(r.name)[0]; // return them to searchResults
+          } 
+        });
+        // filter blank entries from searchResults
+        searchResults = searchResults.filter(function(r){ 
+          return r != undefined;
+        });
+
+        searched_data = searchResults.map(function(r) {
+           return author_nodes.filter(function(p) {
+            return p.name.indexOf(r) != -1;
+          });
+        });
+        // flatten array 
+		searched_data = [].concat.apply([], searched_data);
+		authorTable.selectAll("tr").remove();
+		fillTableEntries(selected_authors, searched_data, authorTable);
+    });
+  		d3.select("#AuthorSearchBar").append("i")
+  			.attr("class", "fas fa-sync-alt resetBtn")
+  			.on("click", authorReset_search)
+		d3.select("#ksearch").on("keyup", function() { 
+			var searched_data = key_nodes;
+            var text = this.value.trim();
+        	var searchResults = searched_data.map(function(r) {
+          	var regex = new RegExp("^" + text + ".*|.* " + text + ".*", "i");
+          	if (regex.test(r.name)) { // if there are any results
+            	return regex.exec(r.name)[0]; // return them to searchResults
+          		} 
+        	});
+       
+       	 	// filter blank entries from searchResults
+        	searchResults = searchResults.filter(function(r){ 
+          		return r != undefined;
+        	});
+        	searched_data = searchResults.map(function(r) {
+           		return key_nodes.filter(function(p) {
+		            return p.name == r;
+		          	});
+        	});
+        
+			searched_data = [].concat.apply([], searched_data);
+
+			keyTable.selectAll("tr").remove();
+			fillTableEntries(selected_keywords, searched_data, keyTable);
+    	});
+    
+		d3.select("#KeywordSearchBar")
+  			.append("i")
+  			.attr("class", "fas fa-sync-alt resetBtn")
+  			.on("click", keyReset_search); 	
+  	
+	function fillTableEntries(selected, entries, table, type){
+		for (var i = 0; i<entries.length;  i++){
+			table.append("tr").append("td")
+				.datum(entries[i])
+				.attr("id", entries[i].id+"s")
+				.on("click", handleTableOnclick)
+				.on("mouseover", mouseover_search)
+    			.on("mouseout",mouseout_search)
+    			.attr("class",function(d){
+    				if (selected.indexOf(entries[i].id) == -1){return "cellDeselected";}
+    				else{ return "cellAuthorSelected";}})
+				.text(entries[i].name);
+			}
+		}
+	
+	function authorReset_search(){
+		while(selected_authors.length >0){
+			var delnode = author_nodes.filter((d)=>d.id == selected_authors[0]);
+			update_selection(delnode[0]);
+		}
+		// authorTable.selectAll("td").attr("class","cellDeselected");
+		var searchBox = document.getElementById("asearch");
+		searchBox.value = "";
+		authorTable.selectAll("tr").remove();
+		fillTableEntries([],author_nodes, authorTable);
+    	update_project_list(selected_pubs,global_selected_dataset);
+    	graphview_update(selected_authors,selected_pubs,selected_keywords);
+	}
+	function keyReset_search(){
+		while(selected_keywords.length >0){
+			var delnode = key_nodes.filter((d)=>d.id == selected_keywords[0]);
+			update_selection(delnode[0]);
+		}
+		var searchBox = document.getElementById("ksearch");
+		searchBox.value = "";
+		keyTable.selectAll("tr").remove();
+		fillTableEntries([], key_nodes, keyTable);
+		update_project_list(selected_pubs,global_selected_dataset);
+    	graphview_update(selected_authors,selected_pubs,selected_keywords);
+	}
+	function mouseover_search(d, i){
+		var node = d3.select(this).datum()
+    	update_tooltip(node.name, global_selected_dataset, this.id[0]);
+    	show_tooltip(true);
+    	if (this.id[0] == "a"){
+    		mouseoverAuthorDots(d);
+    	}else if (this.id[0] = "k"){
+    		mouseoverKeyDots(d);
+    	}
+    }
+	function mouseout_search(d,i){
+		show_tooltip(false);
+		mouseoutAuthorDots(d);
+	}
+ 	function handleTableOnclick(d, i){
+    	thisNode = d3.select(this).datum();   	
+    	if(thisNode.id[0] == "a"){
+    		if(selected_authors.indexOf(d.id) == -1){
+    			d3.select("#"+d.id+"s").attr("class","cellAuthorSelected");
+    		} else{
+
+    			d3.select("#"+d.id+"s").attr("class","cellDeselected");
+    		}
+    	}else{
+    		if(selected_keywords.indexOf(d.id) == -1){
+    			d3.select("#"+d.id+"s").attr("class","cellKeySelected");
+    		} else{
+    			d3.select("#"+d.id+"s").attr("class","cellDeselected");
+    		}
+    	}
+    	update_selection(d3.select(this).datum());
+    	update_project_list(selected_pubs,global_selected_dataset);
+    	
+    }
+	//====================================================================================
+})
+
+
+
+	</script>	
+</body>
+</html>
+
+
