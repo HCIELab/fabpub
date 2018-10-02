@@ -380,7 +380,17 @@ fieldset[disabled] .btn-filter.focus {
 }
 
 /* RESET */
-
+.btn_visualization{
+    color: #fff;
+    background-color: #88a3c8;
+    border-color: #88a3c8;
+    float: right;
+}
+.btn_visualization:hover {
+  color: #fff;
+  background-color: #9fb6d7;
+  border-color: #88a3c8;
+}
 .btn-reset {
   color: #fff;
   background-color: #e95a44;
