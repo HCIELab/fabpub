@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+
+<html xml:lang="en" lang="en">
+<head>
+  <title> CSE512 | Final Project | FabGalaxy </title>
+  <style media="all">
+* { padding: 0; margin: 0; }
+
+body {
+  margin: 0 auto 0 auto;
+  padding: 0;
+  max-width: 1200px;
+  font-family: "Avenir", "Avenir Next", Helvetica Neue, Arial;
+  font-size: 0.95em;
+}
+
+a, a:visited { text-decoration: none; color: #7533f4; }
+a:hover { text-decoration: underline; color: #f4b014; }
+
+h1, h2, h3, h4, h5 {
+  color: #262626;
+  background-color: inherit;
+  font-weight: normal;
+  padding: 0 0 5px 0;
+  margin: 15px 0 0 0;
+  border: none;
+  clear: right;
+  font : sans-serif
+}
+h1 { font-size: 24pt; margin:  5px 0 10px 0; line-height: 28px; }
+h2 { font-size: 14pt; margin: 30px 0 15px 0; letter-spacing: 0.01em; border-top: 1px solid #ccc;  line-height: 20px; padding-top: 1em; font-weight: bold;}
+h3 { font-size: 13pt; }
+h4 { font-size: 12pt; }
+h5 { font-size: 11pt; }
+p { margin: 0 0 10px 0; }
+
+.content {
+  margin: 0;
+  padding: 15px 20px;
+  background-color: #ffffff;
+}
+
+.title, .title h1, .title a {
+  color: #262626;
+  font-size: 18pt;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+
+.footer {
+  border-top: 1px solid #ccc;
+  margin-top: 30px;
+  padding-top: 4px;
+  text-align: right;
+  font-size: 12px;
+}
+.footer a {
+  color: #21346B;
+}
+.footer a:hover {
+  color: #ce3333;
+}
+
+/* Kate's Style */
+.axis .domain {
+  display: none;
+}
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+pre {
+  display: none
+}
+text {
+  font: 10px sans-serif;
+}
+
+form {
+  position: relative;
+  left:10px;
+  font: 9px sans-serif;
+}
+.range-body {
+	fill: #666;
+	opacity: 0.1
+}
+.range-dragger {
+	fill: tomato;
+	cursor: pointer;
+}
+</style>
+<link rel="stylesheet" href="css/basic.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="content">
+
+  <section class="title">
+    <a href="/">FabGalaxy: A Novel Visualization for Exploring Fabrication Research </a>
+  </section>
+
+  <section>
+    <p>
+      <strong>Team Members</strong>: Liang He (lianghe@cs.washington.edu), Kate Jung (sjung94@uw.edu)
+    </p>
+  </section>
+
+  <section>
+    <img src="FabGalaxyInterface.png" width="50%"><br/><br/>
+    <p>FabGalaxy Online Demo: <a href = "https://cse512-18s.github.io/fabviz/">https://cse512-18s.github.io/fabviz/</a> </p>
+    <h2>Abstract</h2> 
+    <p>Fabrication, as a young research field, has been increasingly growing in HCI andGraphics in the past decade. There is no existing search engines or tools for inexperienced junior researchers to know the overall research status, locate the related work, recognize the big brains in this field, and explore potential research topics in fabrication. Inspired by the online repository created by the HCI Engineering Group from MIT CSAIL, we explore a visual and interactive way to present the research work in fabrication. In our tool, we use author and keyword centered search approach and provide a multi-dimensional dot cluster design to visualize all work in fabrication research.</p>
+    <br/>
+
+    Link to our full paper: <a href = "FabGalaxy.pdf">FabGalaxy.PDF</a>
+    <br/> 
+    Link to our poster: <a href="FabGalaxy_poster.pdf"> Poster </a>
+ </section>
+
+
+  <div class="footer">
+    <a href="https://cse512-18s.github.io/">CSE 512 Data Visualization</a> -
+    <a href="http://www.washington.edu">University of Washington</a>
+  </div>
+
+</div>
+</body>
+</html>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
