@@ -35,30 +35,6 @@
 		filterByString(searchValue);
 	});
 
-
-	/// DOGA
-
-
-	$( "#Paper" ).change(function() {
-
-	    var searchValue;
-
-		searchValue = selectPaper.value.toLowerCase().trim() + " " + selectYear.value.toLowerCase().trim();
-		filterByString(searchValue);
-		
-	});
-
-	$( "#Year" ).change(function() {
-
-	    var searchValue;
-
-		searchValue = selectPaper.value.toLowerCase().trim() + " " + selectYear.value.toLowerCase().trim();
-		filterByString(searchValue);
-
-	});
-
-	/// DOGA END.
-
 	// Set up a handler to listen for "click" events from the search input
 	btnAll.addEventListener('click', function() 
 	{
