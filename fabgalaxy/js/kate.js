@@ -61,7 +61,7 @@ function d3_nodesToDots(authors_nodes, pubs_nodes,keywords_nodes, author_links){
     		.attr("id", function(d,i) { return "yearArc"+i; }) //Unique id for each slice
 			.attr("d", yearArc)
  			.style('fill', 'white')
- 			.style('opacity', function(d,i){return 1;});
+ 			.style('opacity', function(d,i){return (count_year-i)/count_year;});
  			
 	var yearLabels = d3.select("#visKate").append("g").selectAll(".yearLabel")
 		.data(pubsByYear)
