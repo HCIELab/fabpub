@@ -39,6 +39,7 @@ function d3_nodesToDots(authors_nodes, pubs_nodes,keywords_nodes, author_links){
     	.key(function(d){return d.year})
     	.rollup(function(v){return v.length;})
     	.entries(pubs_nodes);
+    	
         
     var pie = d3.pie()
     	.startAngle(-90 * Math.PI/180)
