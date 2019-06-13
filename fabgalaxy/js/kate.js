@@ -3,7 +3,7 @@ function d3_nodesToDots(authors_nodes, pubs_nodes,keywords_nodes, author_links){
 	var R1 = 450, 
 		R2 = 500;
 
-	var count_year = 11; // since 2009
+	var count_year = 12; // since 2009
 
 	pubs_nodes = addDotPosition(R1,R2,pubs_nodes);
 	
@@ -94,7 +94,7 @@ function d3_nodesToDots(authors_nodes, pubs_nodes,keywords_nodes, author_links){
 			.attr("id", function(d){return d.id+"g";})
 	
 	keywordDots.append("circle")
-			.attr("r",  function(d){return Math.floor((d.pubs.length/count_year)+6); })
+			.attr("r",  function(d){return Math.floor((d.pubs.length/10)+6); })
 			.style("fill", "NavajoWhite")
 			.attr("class", "keyCircles")
 			.style("opacity", 0.5);
@@ -102,8 +102,8 @@ function d3_nodesToDots(authors_nodes, pubs_nodes,keywords_nodes, author_links){
 	var keyLabels = keywordDots.append("text")
 			.text(function(d){return d.name})
 			.style("fill", "NavajoWhite")
-			.style('opacity',  function(d){return (d.pubs.length/count_year)+0.5;})
-			.style("font-size", function(d){return (d.pubs.length/count_year)+13 + "px"; })
+			.style('opacity',  function(d){return (d.pubs.length/10)+0.5;})
+			.style("font-size", function(d){return (d.pubs.length/10)+13 + "px"; })
    			.attr("id", function(d){return d.id+"g_l";})
    			.attr("dy", ".35em")
    			.attr("text-anchor", "middle")
