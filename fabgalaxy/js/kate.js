@@ -2,9 +2,6 @@
 function d3_nodesToDots(authors_nodes, pubs_nodes,keywords_nodes, author_links){     
 	var R1 = 450, 
 		R2 = 500;
-
-	var count_year = 11; // since 2009
-
 	pubs_nodes = addDotPosition(R1,R2,pubs_nodes);
 	
 	var authorLines = d3.select("#visKate")
@@ -61,7 +58,7 @@ function d3_nodesToDots(authors_nodes, pubs_nodes,keywords_nodes, author_links){
     		.attr("id", function(d,i) { return "yearArc"+i; }) //Unique id for each slice
 			.attr("d", yearArc)
  			.style('fill', 'white')
- 			.style('opacity', function(d,i){return (count_year-i)/count_year;});
+ 			.style('opacity', function(d,i){return (10-i)/10;});
  			
 	var yearLabels = d3.select("#visKate").append("g").selectAll(".yearLabel")
 		.data(pubsByYear)
