@@ -230,6 +230,51 @@
 		
 <div class="row portfolio siggraph 2020 all">
 	<div class="col-md-3">
+	<img class= "paperimage" src="img/SIGGRAPH2020/vpac-carvable.png" />
+	</div>
+	<div class="col-md-9">
+		<span class="papertitle">
+		VDAC: Volume Decompose-and-Carve for Subtractive Manufacturing (ACM Transactions on Graphics 2020)
+		</span>
+		</br>
+		<span class="paperauthors">
+
+		Ali Mahdavi-Amiri, Fenggen Yu, Haisen Zhao, Adriana Schulz, Hao Zhang.
+			
+		</span>
+		</br>
+		<span class="paperdetails">
+
+		We introduce carvable volume decomposition for efficient 3-axis CNC machining of 3D freeform objects, where our goal is to develop a fully
+			automatic method to jointly optimize setup and path planning. We formulate our joint optimization as a volume decomposition problem
+			which prioritizes minimizing the number of setup directions while striving for a minimum number of continuously carvable volumes,
+			where a 3D volume is continuously carvable, or simply carvable, if it can be carved with the machine cutter traversing a single
+			continuous path. Geometrically, carvability combines visibility and monotonicity and presents a new shape property which had not
+			been studied before. Given a target 3D shape and the initial material block, our algorithm first finds the minimum number of carving
+			directions by solving a set cover problem. Specifically, we analyze cutter accessibility and select the carving directions based on
+			an assessment of how likely they would lead to a small carvable volume decomposition. Next, to obtain a minimum decomposition based
+			on the selected carving directions efficiently, we narrow down the solution search by focusing on a special kind of points in the
+			residual volume, single access or SA points, which are points that can be accessed from one and only one of the selected carving
+			directions. Candidate carvable volumes are grown starting from the SA points. Finally, we devise an energy term to evaluate the
+			carvable volumes and their combinations, leading to the final decomposition. We demonstrate the performance of our decomposition
+			algorithm on a variety of 2D and 3D examples and evaluate it against the ground truth, where possible, and solutions provided by
+			human experts. Physically machined models are produced where each carvable volume is continuously carved following a connected
+			Fermat spiral toolpath.
+			
+		</span>
+		</br>
+		</br>
+		<a href="https://dl.acm.org/doi/abs/10.1145/3414685.3417772" class="btn btn-doi" alt="doi" target="_blank">DOI</a> &nbsp; &nbsp;
+		<a href="https://dl.acm.org/doi/pdf/10.1145/3414685.3417772" class="btn btn-pdf" alt="pdf" target="_blank" >PDF</a> &nbsp; &nbsp;
+		<a href="https://drive.google.com/file/d/1_OvzPzf-OC1Y9-J1tfpam4ZubuNR4UjI/view" class="btn btn-vdo" alt="video" target="_blank">Video</a> &nbsp; &nbsp;
+		<a href="https://sites.google.com/site/alimahdaviamiri/projects/vdac?authuser=0g" class="btn btn-pages" alt="page" target="_blank">Page</a>  No Link available
+		
+	
+	</div>
+</div>
+		
+<div class="row portfolio siggraph 2020 all">
+	<div class="col-md-3">
 	<img class= "paperimage" src="img/SIGGRAPH2020/color-fused-filament.png" />
 	</div>
 	<div class="col-md-9">
@@ -2913,6 +2958,42 @@ Introducing interactive components into furniture has proven difficult due to th
 		
 <!--  -------------------SIGGRAPH 2019----------------- -->
 
+
+
+
+<div class="row portfolio siggraph 2019 all">
+	<div class="col-md-3">
+	<img class= "paperimage" src="img/carpentry-compiler.png" />
+	</div>
+	<div class="col-md-9">
+	<span class="papertitle">
+	Carpentry compiler (ACM Transactions on Graphics 2019)
+	</span>
+	</br>
+	<span class="paperauthors">
+		Chenming Wu, Haisen Zhao Chandrakana Nandi, Jeffrey I. Lipton, Zachary Tatlock and Adriana Schulz
+	</span>
+	</br>
+	<span class="paperdetails">
+		Traditional manufacturing workflows strongly decouple design and fabrication phases. As a result, fabrication-related objectives such as
+		manufacturing time and precision are difficult to optimize in the design space, and vice versa. This paper presents HL-HELM, a high-level,
+		domain-specific language for expressing abstract, parametric fabrication plans; it also introduces LL-HELM, a low-level language for
+		expressing concrete fabrication plans that take into account the physical constraints of available manufacturing processes.
+		We present a new compiler that supports the real-time, unoptimized translation of high-level, geometric fabrication operations into concrete,
+		tool-specific fabrication instructions; this gives users immediate feedback on the physical feasibility of plans as they design them.
+		HELM offers novel optimizations to improve accuracy and reduce fabrication time as well as material costs. Finally, optimized low-level
+		plans can be interpreted as step-by-step instructions for users to actually fabricate a physical product. We provide a variety of example
+		fabrication plans in the carpentry domain that are designed using our high-level language, show how the compiler translates and optimizes 
+		these plans to generate concrete low-level instructions, and present the final physical products fabricated in wood.
+	</span>
+	</br>
+	</br>
+	<a href="https://dl.acm.org/doi/10.1145/3355089.3356518" class="btn btn-doi" alt="doi" target="_blank">DOI</a> &nbsp; &nbsp;
+	<a href="https://dl.acm.org/doi/pdf/10.1145/3355089.3356518" class="btn btn-pdf" alt="pdf" target="_blank" >PDF</a> &nbsp; &nbsp;
+	<a href="https://www.youtube.com/watch?v=yaXKP7lv-CI" class="btn btn-vdo" alt="video" target="_blank">Video</a> &nbsp; &nbsp;
+	<a href="https://grail.cs.washington.edu/projects/carpentrycompiler/" class="btn btn-pages" alt="page" target="_blank">Page</a>
+	</div>
+	</div>		
 
 
 
